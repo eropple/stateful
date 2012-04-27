@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Input\IInputEventer.cs" />
     <Compile Include="Input\MouseButtons.cs" />
+    <Compile Include="MonoGame.Desktop\DesktopInputManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
