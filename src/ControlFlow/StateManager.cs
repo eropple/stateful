@@ -30,11 +30,12 @@ namespace Ed.Stateful.ControlFlow
         /// </summary>
         public event StateManagerEmptiedDelegate OnEmpty;
 
-        public StateSystem(IInputEventer input)
+        public StateSystem(IInputEventer input, Controller baseController)
             : base()
         {
             Input = input;
             States = new LinkedList<Controller>();
+            States.AddLast(baseController);
 
             Input.KeyPressed += new KeyboardKeyStateChanged(KeyPressed);
             Input.KeyReleased += new KeyboardKeyStateChanged(KeyReleased);
