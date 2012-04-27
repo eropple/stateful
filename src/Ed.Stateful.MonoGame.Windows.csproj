@@ -8,8 +8,8 @@
     <ProjectGuid>{FBB476B4-C8EE-48CC-B78B-1AC95A1CDA02}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ed.Stateful.MonoGame.Windows</RootNamespace>
-    <AssemblyName>Ed.Stateful.MonoGame.Windows</AssemblyName>
+    <RootNamespace>Ed.Stateful</RootNamespace>
+    <AssemblyName>Ed.Stateful</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,7 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\deps\monogame\MonoGame.Framework\MonoGame.Framework.Windows.csproj">
+    <ProjectReference Include="..\deps\monogame\MonoGame.Framework\MonoGame.Framework.Windows.csproj">
       <Project>{7DE47032-A904-4C29-BD22-2D235E8D91BA}</Project>
       <Name>MonoGame.Framework.Windows</Name>
     </ProjectReference>
