@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlFlow\Controller.cs" />
+    <Compile Include="ControlFlow\StatefulExitException.cs" />
+    <Compile Include="ControlFlow\StateManager.cs" />
     <Compile Include="Input\IInputEventer.cs" />
     <Compile Include="Input\MouseButtons.cs" />
     <Compile Include="MonoGame.Desktop\DesktopInputManager.cs" />
@@ -55,9 +58,7 @@
       <Name>MonoGame.Framework.Windows</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ControlFlow\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
