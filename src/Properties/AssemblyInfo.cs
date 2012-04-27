@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Ed.Stateful.MonoGame.Windows")]
-[assembly: AssemblyDescription("A game state library for MonoGame and Windows.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("http://github.com/eropple/stateful")]
 [assembly: AssemblyProduct("Ed.Stateful")]
