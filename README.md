@@ -10,12 +10,10 @@ Stateful is licensed under the ISC license, under LICENSE.md in this repo.
 Contact: Ed Ropple (ed+stateful@edropple.com)
 
 ## Current Status ##
-Currently, Stateful is essentially feature-complete **for Windows and MonoGame
-only**. As I'm not using XNA myself anymore, it doesn't have a project for that
-(though given MonoGame's compatibility, it should be as simple as creating a
-project, copying over the MonoGame.Windows files, and adding the appropriate
-dependencies). Similarly, it shouldn't be too hard to create MacOS and Linux
-ports on a similar basis.
+Currently, Stateful is essentially feature-complete **for XNA on Windows and
+MonoGame on Windows only**. It shouldn't be too hard to create MacOS and Linux
+ports on a similar basis; similar code should work for the 360 if you want to
+build a project for it.
 
 Eventually (read: when I need it), I'll be adding gesture and touch support for
 MonoGame. That should probably work with XNA on Windows Phone 7, too, but I
