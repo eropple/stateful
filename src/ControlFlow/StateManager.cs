@@ -221,8 +221,8 @@ namespace Ed.Stateful.ControlFlow
     /// <summary>
     /// Delegate to handle when a controller is pushed onto the state stack.
     /// </summary>
-    /// <param name="poppedController">The controller pushed onto the stack (gaining focus).</param>
-    /// <param name="topController">The previous top of the state stack (losing focus).</param>
+    /// <param name="pushedController">The controller pushed onto the stack (gaining focus).</param>
+    /// <param name="formerTopController">The previous top of the state stack (losing focus).</param>
     public delegate void ControllerPushedDelegate(Controller pushedController, Controller formerTopController);
 
     /// <summary>
