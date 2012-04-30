@@ -14,8 +14,9 @@ namespace Ed.Stateful.ControlFlow
         protected readonly IInputEventer Input;
 
         /// <summary>
-        /// Fired after a controller's LoadContent but before it's pushed onto
-        /// the state stack.
+        /// Fired before a controller's LoadContent, after which it is pushed
+        /// onto the stack. (Recommended insertion point for any "readonly"
+        /// data that should be in your controller, like a Contentious context.)
         /// </summary>
         public event ControllerPushedDelegate OnControllerPush;
         /// <summary>
@@ -60,10 +61,10 @@ namespace Ed.Stateful.ControlFlow
                 throw new InvalidOperationException("You cannot push back onto the stack a previously popped state.");
             }
 
-            controller.LoadContent();
-
             if (this.OnControllerPush != null)
                 this.OnControllerPush(controller, States.Last.Value);
+
+            controller.LoadContent();
 
             States.AddLast(controller);
         }
