@@ -13,6 +13,8 @@ namespace Ed.Stateful.ControlFlow
         protected readonly LinkedList<Controller> States;
         protected readonly IInputEventer Input;
 
+        private Boolean _skipDrawFrame = false;
+
         /// <summary>
         /// Fired before a controller's LoadContent, after which it is pushed
         /// onto the stack. (Recommended insertion point for any "readonly"
@@ -96,6 +98,16 @@ namespace Ed.Stateful.ControlFlow
             return c;
         }
 
+        /// <summary>
+        /// If called during the Update() phase, will cause the draw phase to be
+        /// skipped this frame. Useful when a controller is pushed or popped from
+        /// the stack.
+        /// </summary>
+        public void SkipDrawThisFrame()
+        {
+            _skipDrawFrame = true;
+        }
+
         public void Update(Int64 delta)
         {
             if (States.Count < 1)
@@ -105,6 +117,8 @@ namespace Ed.Stateful.ControlFlow
                     throw new StatefulExitException("States.Count == 1; exiting.");
                 }
             }
+
+            _skipDrawFrame = false;
 
             LinkedListNode<Controller> node = States.Last;
 
@@ -116,6 +130,8 @@ namespace Ed.Stateful.ControlFlow
         }
         public void Draw(Int64 delta)
         {
+            if (_skipDrawFrame) return;
+
             LinkedListNode<Controller> node = States.Last;
 
             do
