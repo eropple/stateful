@@ -33,12 +33,11 @@ namespace Ed.Stateful.ControlFlow
         /// </summary>
         public event StateManagerEmptiedDelegate OnEmpty;
 
-        public StateSystem(IInputEventer input, Controller baseController)
+        public StateSystem(IInputEventer input)
             : base()
         {
             Input = input;
             States = new LinkedList<Controller>();
-            States.AddLast(baseController);
 
             Input.KeyPressed += new KeyboardKeyStateChanged(KeyPressed);
             Input.KeyReleased += new KeyboardKeyStateChanged(KeyReleased);
@@ -64,7 +63,7 @@ namespace Ed.Stateful.ControlFlow
             }
 
             if (this.OnControllerPush != null)
-                this.OnControllerPush(controller, States.Last.Value);
+                this.OnControllerPush(controller, (States.Count > 0) ? States.Last.Value : null);
 
             controller.LoadContent();
 
@@ -81,7 +80,7 @@ namespace Ed.Stateful.ControlFlow
             States.RemoveLast();
 
             if (this.OnControllerPop != null)
-                this.OnControllerPop(last, States.Last.Value);
+                this.OnControllerPop(last, (States.Count > 0) ? States.Last.Value : null);
 
             last.Dispose();
             return last;
@@ -232,13 +231,21 @@ namespace Ed.Stateful.ControlFlow
     /// Delegate to handle when a controller is popped off the state stack.
     /// </summary>
     /// <param name="poppedController">The controller popped off the stack (losing focus).</param>
-    /// <param name="topController">The new top of the state stack (getting focus).</param>
+    /// <param name="topController">
+    /// The new top of the state stack (getting focus). This can be null if
+    /// the last state has just been pushed off. If a state is not pushed onto
+    /// the stack before the next Update(), will fire OnEmpty.
+    /// </param>
     public delegate void ControllerPoppedDelegate(Controller poppedController, Controller topController);
     /// <summary>
     /// Delegate to handle when a controller is pushed onto the state stack.
     /// </summary>
     /// <param name="pushedController">The controller pushed onto the stack (gaining focus).</param>
-    /// <param name="formerTopController">The previous top of the state stack (losing focus).</param>
+    /// <param name="formerTopController">
+    /// The previous top of the state stack (losing focus). If null, means that
+    /// this is the first state push of the application /or/ the user is attempting
+    /// to rescue a shutdown by pushing back onto an empty stack.
+    /// </param>
     public delegate void ControllerPushedDelegate(Controller pushedController, Controller formerTopController);
 
     /// <summary>
