@@ -26,6 +26,12 @@ namespace Ed.Stateful.ControlFlow
         /// is disposed.
         /// </summary>
         public event ControllerPoppedDelegate OnControllerPop;
+        
+        public event PreUpdateDelegate OnUpdateStart;
+        public event PostUpdateDelegate OnUpdateEnd;
+        
+        public event PreDrawDelegate OnDrawStart;
+        public event PostDrawDelegate OnDrawEnd;
 
         /// <summary>
         /// Fired when there are no states left in the state stack. This is where
@@ -122,6 +128,9 @@ namespace Ed.Stateful.ControlFlow
             }
 
             _skipDrawFrame = false;
+            
+            if (OnUpdateStart != null)
+                OnUpdateStart(delta);
 
             LinkedListNode<Controller> node = States.Last;
 
@@ -130,10 +139,18 @@ namespace Ed.Stateful.ControlFlow
                 node.Value.RunUpdate(delta, node == States.Last);
                 node = node.Previous;
             }
+            
+            if (OnUpdateEnd != null)
+                OnUpdateEnd(delta);
         }
         public void Draw(Int64 delta)
         {
-            if (_skipDrawFrame) return;
+            if (_skipDrawFrame)
+                return;
+            
+            if (OnDrawStart != null)
+                OnDrawStart(delta);
+            
 
             LinkedListNode<Controller> node = States.Last;
 
@@ -156,6 +173,9 @@ namespace Ed.Stateful.ControlFlow
                 node.Value.RunDraw(delta, node == States.Last);
                 node = node.Next;
             } while (node != null);
+            
+            if (OnDrawEnd != null)
+                OnDrawEnd(delta);
         }
 
         #region Input Handling (spammy)
@@ -279,7 +299,33 @@ namespace Ed.Stateful.ControlFlow
     /// to rescue a shutdown by pushing back onto an empty stack.
     /// </param>
     public delegate void ControllerPushedDelegate(Controller pushedController, Controller formerTopController);
-
+ 
+    
+    /// <summary>
+    /// Delegate to handle events invoked before the controllers' Update()
+    /// methods are fired.
+    /// </summary>
+    /// <param name="delta">Number of milliseconds since last Update() started.</param>
+    public delegate void PreUpdateDelegate(Int64 delta);
+    /// <summary>
+    /// Delegate to handle events invoked before the controllers' Draw()
+    /// methods are fired.
+    /// </summary>
+    /// /// <param name="delta">Number of milliseconds since last Draw() started.</param>
+    public delegate void PreDrawDelegate(Int64 delta);
+    /// <summary>
+    /// Delegate to handle events invoked after the controllers' Update()
+    /// methods are fired.
+    /// </summary>
+    /// <param name="delta">Number of milliseconds since last Update() started.</param>
+    public delegate void PostUpdateDelegate(Int64 delta);
+    /// <summary>
+    /// Delegate to handle events invoked after the controllers' Draw()
+    /// methods are fired.
+    /// </summary>
+    /// /// <param name="delta">Number of milliseconds since last Draw() started.</param>
+    public delegate void PostDrawDelegate(Int64 delta);
+    
     /// <summary>
     /// Delegate to handle the case where there are no controllers left on the
     /// state stack. Should generally be used for cleanup/shutdown.
