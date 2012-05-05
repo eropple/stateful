@@ -114,10 +114,9 @@ namespace Ed.Stateful.ControlFlow
                 if (this.OnEmpty != null)
                 {
                     OnEmpty();
-                }
-                else
-                {
-                    throw new StatefulExitException("States.Count == 1; exiting.");   
+#if WINDOWS || MAC
+                    Environment.Exit(0);
+#endif
                 }
             }
 
