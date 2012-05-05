@@ -111,9 +111,13 @@ namespace Ed.Stateful.ControlFlow
         {
             if (States.Count < 1)
             {
-                if (this.OnEmpty == null)
+                if (this.OnEmpty != null)
                 {
-                    throw new StatefulExitException("States.Count == 1; exiting.");
+                    OnEmpty();
+                }
+                else
+                {
+                    throw new StatefulExitException("States.Count == 1; exiting.");   
                 }
             }
 
