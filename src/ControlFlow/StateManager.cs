@@ -179,98 +179,98 @@ namespace Ed.Stateful.ControlFlow
         }
 
         #region Input Handling (spammy)
-        void ControllerButtonReleased(PlayerIndex index, Buttons button)
+        protected virtual void ControllerButtonReleased(PlayerIndex index, Buttons button)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.ControllerButtonReleased(index, button);
         }
 
-        void ControllerButtonPressed(PlayerIndex index, Buttons button)
+        protected virtual void ControllerButtonPressed(PlayerIndex index, Buttons button)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.ControllerButtonPressed(index, button);
         }
 
-        void ControllerRightTriggerMoved(PlayerIndex index, float delta, float newPosition)
+        protected virtual void ControllerRightTriggerMoved(PlayerIndex index, float delta, float newPosition)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.ControllerRightTriggerMoved(index, delta, newPosition);
         }
 
-        void ControllerLeftTriggerMoved(PlayerIndex index, float delta, float newPosition)
+        protected virtual void ControllerLeftTriggerMoved(PlayerIndex index, float delta, float newPosition)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.ControllerLeftTriggerMoved(index, delta, newPosition);
         }
 
-        void ControllerRightThumbstickMoved(PlayerIndex index, Vector2 delta, Vector2 newPosition)
+        protected virtual void ControllerRightThumbstickMoved(PlayerIndex index, Vector2 delta, Vector2 newPosition)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.ControllerRightThumbstickMoved(index, delta, newPosition);
         }
 
-        void ControllerLeftThumbstickMoved(PlayerIndex index, Vector2 delta, Vector2 newPosition)
+        protected virtual void ControllerLeftThumbstickMoved(PlayerIndex index, Vector2 delta, Vector2 newPosition)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.ControllerLeftThumbstickMoved(index, delta, newPosition);
         }
 
-        void ControllerDisconnected(PlayerIndex index)
+        protected virtual void ControllerDisconnected(PlayerIndex index)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.ControllerDisconnected(index);
         }
 
-        void ControllerConnected(PlayerIndex index)
+        protected virtual void ControllerConnected(PlayerIndex index)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.ControllerConnected(index);
         }
 
-        void MouseButtonReleased(MouseButtons button, Point currentPosition)
+        protected virtual void MouseButtonReleased(MouseButtons button, Point currentPosition)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.MouseButtonReleased(button, currentPosition);
         }
 
-        void MouseButtonPressed(MouseButtons button, Point currentPosition)
+        protected virtual void MouseButtonPressed(MouseButtons button, Point currentPosition)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.MouseButtonPressed(button, currentPosition);
         }
 
-        void MouseScrollWheelMoved(int delta)
+        protected virtual void MouseScrollWheelMoved(int delta)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.MouseScrollWheelMoved(delta);
         }
 
-        void MouseMoved(Point delta, Point newPosition)
+        protected virtual void MouseMoved(Point delta, Point newPosition)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.MouseMoved(delta, newPosition);
         }
 
-        void KeyReleased(Keys key, bool ctrl, bool alt, bool shift)
+        protected virtual void KeyReleased(Keys key, bool ctrl, bool alt, bool shift)
         {
             if (States.Count == 0)
                 return;
             States.Last.Value.KeyReleased(key, ctrl, alt, shift);
         }
 
-        void KeyPressed(Keys key, bool ctrl, bool alt, bool shift)
+        protected virtual void KeyPressed(Keys key, bool ctrl, bool alt, bool shift)
         {
             if (States.Count == 0)
                 return;
